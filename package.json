@@ -17,6 +17,7 @@
   },
   "homepage": "https://github.com/wfentress/autosonic#readme",
   "dependencies": {
+    "currency.js": "^1.2.2",
     "splitwise": "^1.0.0"
   }
 }

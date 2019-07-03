@@ -1,0 +1,14 @@
+[options]
+# this assumes the only mail you get at your @sonic.net address is the billing notification
+delete = true
+
+[retriever]
+type = SimplePOP3SSLRetriever
+server = pop.sonic.net
+username = joeuser
+password = hunter2
+
+[destination]
+type = MDA_external
+path = /usr/bin/node
+arguments = ("/whereever/you/put/autosonic/index.js", )
