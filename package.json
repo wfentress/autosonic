@@ -17,7 +17,11 @@
   },
   "homepage": "https://github.com/wfentress/autosonic#readme",
   "dependencies": {
+    "cheerio": "^1.0.0-rc.3",
     "currency.js": "^1.2.2",
+    "otp-client": "^1.0.1",
+    "request": "^2.88.0",
+    "request-promise-native": "^1.0.7",
     "splitwise": "^1.0.0"
   }
 }

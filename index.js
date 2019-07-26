@@ -47,21 +47,21 @@ function processResults(dateString, amountString) {
   const shares = currency(amountString).distribute(3).map(s => s.toString());
   if (shares[0] === shares[1]) shares.unshift(shares.pop());
 
-  const users = config.users
+  const users = config.splitwise.users
     .map((e, i) => Object.assign({}, e, {paid_share: '0.00', owed_share: shares[i]}));
   users[0].paid_share = amountString;
   const swExpense = {
     users,
     cost: amountString,
     currency_code: 'USD',
-    group_id: config.group_id,
+    group_id: config.splitwise.group_id,
     category_id: '8',
     date: new Date(dateString).toString(),
     description: 'Sonic',
     creation_method: 'equal'
   };
 
-  const sw = Splitwise(config.swInit);
+  const sw = Splitwise(config.splitwise.swInit);
   sw.createExpense(swExpense).catch(e => {
     process.exitCode = 1;
     console.error(e);
