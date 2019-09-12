@@ -67,7 +67,7 @@ const getSonicData = async () => {
     const [month, day, year] = dateString.split('/').map(Number);
     const amountString = response(tr).children('.amount').text();
     return {
-      date: new Date(year, month - 1, day),
+      date: new Date(Date.UTC(year, month - 1, day, 16)),
       amount: currency(amountString)
     };
   }).get();

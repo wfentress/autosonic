@@ -62,6 +62,3 @@ typings/
 
 # private config file
 config.json
-
-# getmail config file
-getmailrc

@@ -1,18 +1,25 @@
 {
-  "swInit": {
-    "consumerKey": "XXXXX",
-    "consumerSecret": "YYYYY"
+  "sonic": {
+    "user": "sonic username",
+    "pw": "sonic p@ssw0rd",
+    "authenticatorKey": "SONC 2FAS 32CH ARAC TERS KEEY ITIS REQD"
   },
-  "users": [
-    {
-      "user_id":"3141593, the ID of the user who makes the payments"
+  "splitwise": {
+    "swInit": {
+      "consumerKey": "XXXXX",
+      "consumerSecret": "YYYYY"
     },
-    {
-      "user_id":"2718282, one of exactly 3 people sharing the expense equally"
-    },
-    {
-      "user_id":"1414214, and the rest"
-    }
-  ],
-  "group_id":"707107, the group these three belong to"
+    "users": [
+      {
+        "user_id":"3141593, the ID of the user who makes the payments"
+      },
+      {
+        "user_id":"2718282, one of exactly 3 people sharing the expense equally"
+      },
+      {
+        "user_id":"1414214, and the rest"
+      }
+    ],
+    "group_id":"707107, the group these three belong to"
+  }
 }
