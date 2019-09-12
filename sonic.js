@@ -4,7 +4,7 @@ const cheerio = require('cheerio');
 const OTP = require('otp-client').default;
 const currency = require('currency.js');
 
-const setCookies = (jar, cookies) => {
+const promisifiedSetCookiesFromHeader = (jar) => (cookies, domain) => {
   if (!cookies) return Promise.resolve(undefined);
 
   const promisedSetCookie = string => new Promise((resolve, reject) => {
@@ -25,11 +25,12 @@ const getSonicData = async () => {
   let response;
   const otp = new OTP(config.authenticatorKey.replace(/ /g, ''));
   const jar = rp.jar();
+  const setCookies = promisifiedSetCookiesFromHeader(jar);
   const sonicRp = rp.defaults({
     jar,
     followAllRedirects: true,
     transform: (body, response, useFullResponse) => {
-      setCookies(jar, response.headers['set-cookie']);
+      setCookies(response.headers['set-cookie']);
       response.body = cheerio.load(body);
       return useFullResponse ? response : response.body;
     }
