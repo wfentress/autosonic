@@ -3,6 +3,8 @@ const Splitwise = require('splitwise');
 const currency = require('currency.js');
 const sonic = require('./sonic.js');
 
+const argv = require('./parseArgv.js')({verbose: 'v'});
+
 const sw = Splitwise(config.splitwise.swInit);
 
 async function getSonicList () {
@@ -38,10 +40,24 @@ function createExpense ({date, amount}) {
     creation_method: 'equal'
   };
 
-  sw.createExpense(swExpense).catch(e => {
-    process.exitCode = 1;
-    console.error(e);
-  });
+  return sw.createExpense(swExpense);
 }
 
-getSonicList().then(list => list.forEach(createExpense));
+function verboseLog(...args) {
+  if (!argv.verbose) return;
+  console.log(...args);
+}
+
+(async function () {
+  let list;
+  try {
+    list = await getSonicList();
+    verboseLog(`found ${list.length} new Sonic bill(s)`);
+    list.forEach(e => verboseLog(`${e.date.toISOString().split('T')[0]}: ${e.amount}`));
+    await Promise.all(list.map(expense => createExpense(expense)));
+    verboseLog('Splitwise expense(s) created successfully');
+  } catch (e) {
+    process.exitCode = 1;
+    console.error(e);
+  }
+})();
